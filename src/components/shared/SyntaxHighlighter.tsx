@@ -1,17 +1,20 @@
-import { Prism } from 'react-syntax-highlighter'
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import type { SyntaxHighlighterProps as ReactSyntaxHighlighterProps } from 'react-syntax-highlighter'
 
-type SyntaxHighlighterProps = ReactSyntaxHighlighterProps
+import React from 'react';
 
-const SyntaxHighlighter = (props: SyntaxHighlighterProps) => {
-    const { children, ...rest } = props
-
-    return (
-        <Prism style={oneDark} className="not-prose text-sm" {...rest}>
-            {children}
-        </Prism>
-    )
+type SyntaxHighlighterProps = {
+    children: React.ReactNode;
+    language?: string;
+    className?: string;
 }
 
-export default SyntaxHighlighter
+const SyntaxHighlighter = (props: SyntaxHighlighterProps) => {
+    const { children, className } = props;
+
+    return (
+        <pre className={`bg-gray-800 text-white p-4 rounded-md overflow-auto ${className || ''}`}>
+            <code>{children}</code>
+        </pre>
+    );
+};
+
+export default SyntaxHighlighter;

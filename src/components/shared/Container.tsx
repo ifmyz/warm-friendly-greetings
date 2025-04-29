@@ -1,30 +1,28 @@
-import classNames from 'classnames'
-import { CommonProps } from '@/@types/common'
-import type { ElementType, Ref } from 'react'
 
-interface ContainerProps extends CommonProps {
-    asElement?: ElementType
-    ref?: Ref<HTMLElement>
+import React from 'react';
+import classNames from '@/utils/classNames';
+
+interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+    children: React.ReactNode;
+    asElement?: React.ElementType;
 }
 
 const Container = (props: ContainerProps) => {
-    const {
-        className,
-        children,
-        asElement: Component = 'div',
-        ref,
-        ...rest
-    } = props
+    const { 
+        className, 
+        children, 
+        asElement: Component = 'div', 
+        ...rest 
+    } = props;
 
     return (
-        <Component
-            ref={ref}
+        <Component 
             className={classNames('container mx-auto', className)}
             {...rest}
         >
             {children}
         </Component>
-    )
-}
+    );
+};
 
-export default Container
+export default Container;

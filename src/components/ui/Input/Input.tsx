@@ -1,37 +1,30 @@
-import { useState, useEffect, useRef } from 'react'
-import classNames from 'classnames'
-import { useConfig } from '../ConfigProvider'
-import { useForm, useFormItem } from '../Form/context'
-import { useInputGroup } from '../InputGroup/context'
-import { CONTROL_SIZES } from '../utils/constants'
-import isNil from 'lodash/isNil'
-import type { CommonProps, TypeAttributes } from '../@types/common'
-import type {
-    InputHTMLAttributes,
-    ElementType,
-    ReactNode,
-    HTMLInputTypeAttribute,
-    ClassAttributes,
-    Ref,
-} from 'react'
 
-export interface InputProps
-    extends CommonProps,
-        Omit<
-            InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
-            'size' | 'prefix'
-        > {
-    asElement?: ElementType
-    disabled?: boolean
-    invalid?: boolean
-    prefix?: string | ReactNode
-    rows?: number
-    ref?: Ref<ElementType | HTMLInputElement | HTMLTextAreaElement>
-    size?: TypeAttributes.ControlSize
-    suffix?: string | ReactNode
-    textArea?: boolean
-    type?: HTMLInputTypeAttribute
-    unstyle?: boolean
+import { useState, useEffect, useRef } from 'react';
+import classNames from '@/utils/classNames';
+import { useConfig } from '../ConfigProvider';
+import { useForm, useFormItem } from '../Form/context';
+import { useInputGroup } from '../InputGroup/context';
+import { CONTROL_SIZES } from '../utils/constants';
+
+const isNil = (value: any) => value === undefined || value === null;
+
+interface InputProps {
+    asElement?: React.ElementType;
+    className?: string;
+    disabled?: boolean;
+    invalid?: boolean;
+    prefix?: React.ReactNode;
+    size?: 'lg' | 'md' | 'sm';
+    suffix?: React.ReactNode;
+    textArea?: boolean;
+    type?: string;
+    ref?: React.Ref<any>;
+    rows?: number;
+    style?: React.CSSProperties;
+    unstyle?: boolean;
+    value?: string;
+    defaultValue?: string;
+    [key: string]: any;
 }
 
 const Input = (props: InputProps) => {
@@ -50,41 +43,35 @@ const Input = (props: InputProps) => {
         style,
         unstyle = false,
         ...rest
-    } = props
+    } = props;
 
-    const [prefixGutter, setPrefixGutter] = useState(0)
-    const [suffixGutter, setSuffixGutter] = useState(0)
+    const [prefixGutter, setPrefixGutter] = useState(0);
+    const [suffixGutter, setSuffixGutter] = useState(0);
 
-    const { controlSize, direction } = useConfig()
-    const formControlSize = useForm()?.size
-    const formItemInvalid = useFormItem()?.invalid
-    const inputGroupSize = useInputGroup()?.size
+    const { controlSize, direction } = useConfig();
+    const formControlSize = useForm()?.size;
+    const formItemInvalid = useFormItem()?.invalid;
+    const inputGroupSize = useInputGroup()?.size;
 
-    const inputSize = size || inputGroupSize || formControlSize || controlSize
+    const inputSize = size || inputGroupSize || formControlSize || controlSize;
+    const isInputInvalid = invalid || formItemInvalid;
 
-    const isInputInvalid = invalid || formItemInvalid
-
-    const fixControlledValue = (
-        val: string | number | readonly string[] | undefined,
-    ) => {
+    const fixControlledValue = (val: any) => {
         if (typeof val === 'undefined' || val === null) {
-            return ''
+            return '';
         }
-        return val
-    }
+        return val;
+    };
 
     if ('value' in props) {
-        rest.value = fixControlledValue(props.value)
-        delete rest.defaultValue
+        rest.value = fixControlledValue(props.value);
+        delete rest.defaultValue;
     }
 
-    const inputDefaultClass = 'input'
-    const inputSizeClass = `input-${inputSize} ${CONTROL_SIZES[inputSize].h}`
-    const inputFocusClass = `focus:ring-primary focus-within:ring-primary focus-within:border-primary focus:border-primary`
-    const inputWrapperClass = classNames(
-        'input-wrapper',
-        prefix || suffix ? className : '',
-    )
+    const inputDefaultClass = 'input';
+    const inputSizeClass = `input-${inputSize} ${CONTROL_SIZES[inputSize].h}`;
+    const inputFocusClass = `focus:ring-primary focus-within:ring-primary focus-within:border-primary focus:border-primary`;
+    const inputWrapperClass = classNames('input-wrapper', prefix || suffix ? className : '');
     const inputClass = classNames(
         inputDefaultClass,
         !textArea && inputSizeClass,
@@ -92,91 +79,83 @@ const Input = (props: InputProps) => {
         !prefix && !suffix ? className : '',
         disabled && 'input-disabled',
         isInputInvalid && 'input-invalid',
-        textArea && 'input-textarea',
-    )
+        textArea && 'input-textarea'
+    );
 
-    const prefixNode = useRef<HTMLDivElement>(null)
-    const suffixNode = useRef<HTMLDivElement>(null)
+    const prefixNode = useRef<HTMLDivElement>(null);
+    const suffixNode = useRef<HTMLDivElement>(null);
 
     const getAffixSize = () => {
         if (!prefixNode.current && !suffixNode.current) {
-            return
+            return;
         }
-        const prefixNodeWidth = prefixNode?.current?.offsetWidth
-        const suffixNodeWidth = suffixNode?.current?.offsetWidth
+
+        const prefixNodeWidth = prefixNode?.current?.offsetWidth;
+        const suffixNodeWidth = suffixNode?.current?.offsetWidth;
 
         if (isNil(prefixNodeWidth) && isNil(suffixNodeWidth)) {
-            return
+            return;
         }
 
         if (prefixNodeWidth) {
-            setPrefixGutter(prefixNodeWidth)
+            setPrefixGutter(prefixNodeWidth);
         }
 
         if (suffixNodeWidth) {
-            setSuffixGutter(suffixNodeWidth)
+            setSuffixGutter(suffixNodeWidth);
         }
-    }
+    };
 
     useEffect(() => {
-        getAffixSize()
-    }, [prefix, suffix])
+        getAffixSize();
+    }, [prefix, suffix]);
 
-    const remToPxConvertion = (pixel: number) => 0.0625 * pixel
+    const remToPxConvertion = (pixel: number) => 0.0625 * pixel;
 
     const affixGutterStyle = () => {
-        const leftGutter = `${remToPxConvertion(prefixGutter) + 1}rem`
-        const rightGutter = `${remToPxConvertion(suffixGutter) + 1}rem`
-        const gutterStyle: {
-            paddingLeft?: string
-            paddingRight?: string
-        } = {}
+        const leftGutter = `${remToPxConvertion(prefixGutter) + 1}rem`;
+        const rightGutter = `${remToPxConvertion(suffixGutter) + 1}rem`;
+        const gutterStyle: Record<string, string> = {};
 
         if (direction === 'ltr') {
             if (prefix) {
-                gutterStyle.paddingLeft = leftGutter
+                gutterStyle.paddingLeft = leftGutter;
             }
-
             if (suffix) {
-                gutterStyle.paddingRight = rightGutter
+                gutterStyle.paddingRight = rightGutter;
             }
         }
 
         if (direction === 'rtl') {
             if (prefix) {
-                gutterStyle.paddingRight = leftGutter
+                gutterStyle.paddingRight = leftGutter;
             }
-
             if (suffix) {
-                gutterStyle.paddingLeft = rightGutter
+                gutterStyle.paddingLeft = rightGutter;
             }
         }
-
-        return gutterStyle
-    }
+        return gutterStyle;
+    };
 
     const inputProps = {
         className: !unstyle ? inputClass : '',
         disabled,
         type,
         ref,
-        ...rest,
-    }
+        ...rest
+    };
 
-    const renderTextArea = (
-        <textarea
-            style={style}
-            rows={rows}
-            {...(inputProps as ClassAttributes<HTMLTextAreaElement>)}
-        ></textarea>
-    )
+    const renderTextArea = <textarea style={style} rows={rows} {...inputProps} />;
 
     const renderInput = (
         <Component
-            style={{ ...affixGutterStyle(), ...style }}
+            style={{
+                ...affixGutterStyle(),
+                ...style
+            }}
             {...inputProps}
         />
-    )
+    );
 
     const renderAffixInput = (
         <span className={inputWrapperClass}>
@@ -193,21 +172,20 @@ const Input = (props: InputProps) => {
                 </div>
             ) : null}
         </span>
-    )
+    );
 
     const renderChildren = () => {
         if (textArea) {
-            return renderTextArea
+            return renderTextArea;
         }
-
         if (prefix || suffix) {
-            return renderAffixInput
+            return renderAffixInput;
         } else {
-            return renderInput
+            return renderInput;
         }
-    }
+    };
 
-    return renderChildren()
-}
+    return renderChildren();
+};
 
-export default Input
+export default Input;
