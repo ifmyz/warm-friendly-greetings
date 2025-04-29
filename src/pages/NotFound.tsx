@@ -1,5 +1,12 @@
+
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import Container from "@/components/shared/Container";
+import Button from "@/components/ui/Button";
+import Header from "@/components/template/Header";
+import Footer from "@/components/template/Footer";
+import { TbArrowLeft, TbHome } from "react-icons/tb";
 
 const NotFound = () => {
   const location = useLocation();
@@ -11,15 +18,52 @@ const NotFound = () => {
     );
   }, [location.pathname]);
 
+  // Header content
+  const headerStart = (
+    <div className="flex items-center">
+      <Link to="/">
+        <h2 className="text-2xl font-bold">FreelanceDZ</h2>
+      </Link>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Header headerStart={headerStart} className="shadow-sm" />
+      
+      <main className="flex-1 flex items-center justify-center">
+        <Container className="max-w-lg text-center py-12">
+          <h1 className="text-8xl font-bold mb-4">404</h1>
+          <p className="text-2xl text-gray-600 dark:text-gray-300 mb-8">Oops! Page not found</p>
+          <p className="text-gray-500 dark:text-gray-400 mb-8">
+            The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              variant="solid"
+              onClick={() => window.history.back()}
+              icon={<TbArrowLeft />}
+            >
+              Go Back
+            </Button>
+            
+            <Link to="/">
+              <Button 
+                variant="default"
+                icon={<TbHome />}
+              >
+                Return to Home
+              </Button>
+            </Link>
+          </div>
+        </Container>
+      </main>
+      
+      <Footer 
+        pageContainerType="contained" 
+        className="mt-auto border-t border-gray-200 dark:border-gray-700" 
+      />
     </div>
   );
 };
