@@ -8,7 +8,7 @@ import Radio from '@/components/ui/Radio';
 import Loading from '@/components/shared/Loading';
 import Header from '@/components/template/Header';
 import Footer from '@/components/template/Footer';
-import { Mail, Lock, User } from 'lucide-react';
+import { FiMail, FiLock, FiUser } from 'react-icons/fi';
 
 const Register = () => {
   // Get role from URL parameter if present
@@ -144,7 +144,7 @@ const Register = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<User className="text-gray-500" />}
+                    prefix={<FiUser className="text-gray-500" />}
                   />
                 </div>
                 
@@ -157,7 +157,7 @@ const Register = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<Mail className="text-gray-500" />}
+                    prefix={<FiMail className="text-gray-500" />}
                   />
                 </div>
                 
@@ -170,7 +170,7 @@ const Register = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<Lock className="text-gray-500" />}
+                    prefix={<FiLock className="text-gray-500" />}
                   />
                 </div>
                 

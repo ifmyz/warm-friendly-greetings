@@ -8,7 +8,7 @@ import Checkbox from '@/components/ui/Checkbox';
 import Loading from '@/components/shared/Loading';
 import Header from '@/components/template/Header';
 import Footer from '@/components/template/Footer';
-import { Mail, Lock } from 'lucide-react';
+import { FiMail, FiLock } from 'react-icons/fi';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -100,7 +100,7 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<Mail className="text-gray-500" />}
+                    prefix={<FiMail className="text-gray-500" />}
                   />
                 </div>
                 
@@ -113,7 +113,7 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<Lock className="text-gray-500" />}
+                    prefix={<FiLock className="text-gray-500" />}
                   />
                 </div>
                 

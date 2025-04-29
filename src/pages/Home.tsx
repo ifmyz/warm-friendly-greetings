@@ -7,7 +7,7 @@ import Container from '@/components/shared/Container';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Loading from '@/components/shared/Loading';
-import { Search, ArrowRight } from 'lucide-react';
+import { FiSearch, FiArrowRight } from 'react-icons/fi';
 
 // Types for our mock data
 type ServiceCategory = {
@@ -167,13 +167,13 @@ const Home = () => {
                     placeholder="Search for services..." 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    prefix={<FiSearch className="text-gray-500 text-xl" />}
                   />
-                  <Search className="absolute left-4 top-3 text-gray-500 text-xl" />
                 </div>
                 
                 <div className="flex gap-4">
-                  <Button size="lg" variant="default">
-                    Find Talent <ArrowRight className="ml-2" />
+                  <Button size="lg" variant="default" iconAlignment="end" icon={<FiArrowRight />}>
+                    Find Talent
                   </Button>
                   <Button size="lg" variant="outline">
                     Browse Projects

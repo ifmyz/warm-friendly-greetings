@@ -6,7 +6,7 @@ import Container from "@/components/shared/Container";
 import Button from "@/components/ui/Button";
 import Header from "@/components/template/Header";
 import Footer from "@/components/template/Footer";
-import { ArrowLeft, Home } from "lucide-react";
+import { FiArrowLeft, FiHome } from "react-icons/fi";
 
 const NotFound = () => {
   const location = useLocation();
@@ -43,13 +43,19 @@ const NotFound = () => {
             <Button 
               variant="outline"
               onClick={() => window.history.back()}
+              icon={<FiArrowLeft />}
+              iconAlignment="start"
             >
-              <ArrowLeft className="mr-2" /> Go Back
+              Go Back
             </Button>
             
             <Link to="/">
-              <Button variant="default">
-                <Home className="mr-2" /> Return to Home
+              <Button 
+                variant="default"
+                icon={<FiHome />}
+                iconAlignment="start"
+              >
+                Return to Home
               </Button>
             </Link>
           </div>
