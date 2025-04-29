@@ -7,7 +7,7 @@ import Container from '@/components/shared/Container';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Loading from '@/components/shared/Loading';
-import { TbArrowRight, TbSearch } from 'react-icons/tb';
+import { Search, ArrowRight } from 'lucide-react';
 
 // Types for our mock data
 type ServiceCategory = {
@@ -96,7 +96,7 @@ const Home = () => {
               name: 'Lina B.', 
               role: 'Freelance Designer', 
               company: 'Self-employed', 
-              quote: 'Since joining as a freelancer, I've been able to build a consistent client base and grow my portfolio.', 
+              quote: "Since joining as a freelancer, I have been able to build a consistent client base and grow my portfolio.", 
               avatar: 'https://randomuser.me/api/portraits/women/68.jpg' 
             }
           ];
@@ -133,10 +133,10 @@ const Home = () => {
         </Link>
       </div>
       <Link to="/login">
-        <Button variant="plain">Sign In</Button>
+        <Button variant="outline">Sign In</Button>
       </Link>
       <Link to="/register">
-        <Button variant="solid">Sign Up</Button>
+        <Button variant="default">Sign Up</Button>
       </Link>
     </div>
   );
@@ -168,14 +168,14 @@ const Home = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <TbSearch className="absolute left-4 top-3 text-gray-500 text-xl" />
+                  <Search className="absolute left-4 top-3 text-gray-500 text-xl" />
                 </div>
                 
                 <div className="flex gap-4">
-                  <Button size="lg" variant="solid" iconAlignment="end" icon={<TbArrowRight />}>
-                    Find Talent
-                  </Button>
                   <Button size="lg" variant="default">
+                    Find Talent <ArrowRight className="ml-2" />
+                  </Button>
+                  <Button size="lg" variant="outline">
                     Browse Projects
                   </Button>
                 </div>

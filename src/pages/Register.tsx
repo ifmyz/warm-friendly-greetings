@@ -8,7 +8,7 @@ import Radio from '@/components/ui/Radio';
 import Loading from '@/components/shared/Loading';
 import Header from '@/components/template/Header';
 import Footer from '@/components/template/Footer';
-import { TbLock, TbMail, TbUser } from 'react-icons/tb';
+import { Mail, Lock, User } from 'lucide-react';
 
 const Register = () => {
   // Get role from URL parameter if present
@@ -67,7 +67,7 @@ const Register = () => {
       
       // Simulate redirect after successful registration
       setTimeout(() => {
-        // In a real app, this would use navigation to redirect to dashboard or login
+        // In a real app, this would use navigation to redirect to dashboard
         alert(`Registration successful as ${role}! Redirecting to dashboard...`);
         
         // Reset form and states
@@ -144,7 +144,7 @@ const Register = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<TbUser className="text-gray-500" />}
+                    prefix={<User className="text-gray-500" />}
                   />
                 </div>
                 
@@ -157,7 +157,7 @@ const Register = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<TbMail className="text-gray-500" />}
+                    prefix={<Mail className="text-gray-500" />}
                   />
                 </div>
                 
@@ -170,7 +170,7 @@ const Register = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<TbLock className="text-gray-500" />}
+                    prefix={<Lock className="text-gray-500" />}
                   />
                 </div>
                 
@@ -192,7 +192,7 @@ const Register = () => {
                 
                 <Button
                   type="submit"
-                  variant="solid"
+                  variant="default"
                   className="w-full"
                   disabled={isSubmitting}
                   loading={isLoading}

@@ -8,7 +8,7 @@ import Checkbox from '@/components/ui/Checkbox';
 import Loading from '@/components/shared/Loading';
 import Header from '@/components/template/Header';
 import Footer from '@/components/template/Footer';
-import { TbLock, TbMail } from 'react-icons/tb';
+import { Mail, Lock } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -100,7 +100,7 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<TbMail className="text-gray-500" />}
+                    prefix={<Mail className="text-gray-500" />}
                   />
                 </div>
                 
@@ -113,7 +113,7 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isSubmitting}
-                    prefix={<TbLock className="text-gray-500" />}
+                    prefix={<Lock className="text-gray-500" />}
                   />
                 </div>
                 
@@ -133,7 +133,7 @@ const Login = () => {
                 
                 <Button
                   type="submit"
-                  variant="solid"
+                  variant="default"
                   className="w-full"
                   disabled={isSubmitting}
                   loading={isLoading}

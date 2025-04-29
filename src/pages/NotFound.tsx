@@ -6,7 +6,7 @@ import Container from "@/components/shared/Container";
 import Button from "@/components/ui/Button";
 import Header from "@/components/template/Header";
 import Footer from "@/components/template/Footer";
-import { TbArrowLeft, TbHome } from "react-icons/tb";
+import { ArrowLeft, Home } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
@@ -41,19 +41,15 @@ const NotFound = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              variant="solid"
+              variant="outline"
               onClick={() => window.history.back()}
-              icon={<TbArrowLeft />}
             >
-              Go Back
+              <ArrowLeft className="mr-2" /> Go Back
             </Button>
             
             <Link to="/">
-              <Button 
-                variant="default"
-                icon={<TbHome />}
-              >
-                Return to Home
+              <Button variant="default">
+                <Home className="mr-2" /> Return to Home
               </Button>
             </Link>
           </div>
